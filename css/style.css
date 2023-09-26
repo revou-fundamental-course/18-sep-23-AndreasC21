@@ -64,11 +64,6 @@ body {
     display: none;
 }
 
-.fade {
-    animation: fade;
-    animation-duration: 1.5s;
-  }
-
 .image {
     vertical-align: middle;
     width: 100%;
