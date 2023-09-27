@@ -1,35 +1,42 @@
-let slideIndex = 0;
-showSlides();
+document.getElementById("button").addEventListener("click", function() {
+    let name = document.forms['content-form']['your-name'].value;
+    let email = document.forms['content-form']['email'].value;
+    let interest = document.forms['content-form']['interest'].value;
 
-
-function ValidationForm() {
-    var name = document.getElementById("your-name").value;
-    var email = document.getElementById("email").value
-    var interest = document.getElementById("interest").value
-
-    if (name != "" && email!="" && interest !="") {
-        return true;
-    }else{
-        alert('Anda harus mengisi data dengan lengkap !');
+    if (!name) {
+        document.getElementById("name-error").innerText ="Name cannot be blank!"
+    } else {
+        document.getElementById("name-error").innerText =""
     }
+
+    if (!email) {
+        document.getElementById("email-error").innerText ="Email cannot be blank!"
+    } else {
+        document.getElementById("email-error").innerText =""
+    }
+
+    if (!interest) {
+        document.getElementById("interest-error").innerText ="Interest cannot be blank!"
+    } else {
+        document.getElementById("interest-error").innerText =""
+    }
+})
+
+
+const carouselSlides = document.querySelectorAll(".slide")
+let currentIndex = 0;
+let interval = 2000;
+
+function nextSlide() {
+    carouselSlides[currentIndex].classList.remove("active");
+    currentIndex = (currentIndex + 1) % carouselSlides.length;
+    carouselSlides[currentIndex].classList.add("active");
 }
 
-function showSlides() {
-    let i;
-    let slides = document.querySelectorAll(".slide");
-
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
-
-    slideIndex++;
-    if (slideIndex > slides.length) {
-        slideIndex = 1;
-    }
-
-    if (slides[slideIndex - 1]) {
-        slides[slideIndex - 1].style.display = "block";
-    }
-
-    setTimeout(showSlides, 2000);
+function startSlide() {
+    setInterval(nextSlide, interval);
 }
+
+(function() {
+    startSlide()
+})()
